@@ -1,0 +1,19 @@
+{ 
+	"Http":{
+		"Addr":":8876",
+		"TimeOut":10
+	},
+	"DB":{
+		"Host":"127.0.0.1",
+		"Port":"3306",
+		"User":"root",
+		"Passwd":"Mysql@2017",
+		"DbName":"rules"
+	},
+	"Redis":{
+		"Addr":"127.0.0.1:6666",
+		"MaxIdle":100,
+		"IdleTimeOut":240,
+		"Passwd":"redis"
+	}
+}
