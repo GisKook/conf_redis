@@ -60,6 +60,11 @@ func (s *Server) Init() error {
 
 func (s *Server) Handle() {
 	http.HandleFunc("/knet2sp/update_ci", s.handler_update_ci)
+	http.HandleFunc("/knet2sp/update_black_list", s.handler_update_black_list)
+	http.HandleFunc("/knet2sp/update_county_number", s.handler_update_county_number)
+	http.HandleFunc("/knet2sp/update_local_number", s.handler_update_local_number)
+	http.HandleFunc("/knet2sp/update_white_list", s.handler_update_white_list)
+	http.HandleFunc("/knet2sp/update_unsub_number", s.handler_update_unsub_number)
 	http.ListenAndServe(s.conf.Http.Addr, nil)
 }
 
