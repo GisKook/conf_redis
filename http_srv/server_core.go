@@ -1,9 +1,14 @@
 package http_srv
 
 import (
+	"errors"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"log"
+)
+
+var (
+	ErrNoData = errors.New("table is nil")
 )
 
 const (
@@ -30,13 +35,19 @@ func (s *Server) update_core(redis_set string, table string, column string) erro
 		return err
 	}
 	defer rows.Close()
+
+	row_count := 0
 	for rows.Next() {
+		row_count++
 		var value string
 		if err := rows.Scan(&value); err != nil {
 			return err
 		}
 		conn.Send("SADD", redis_set, value)
 		conn.Send("SADD", redis_set_new, value)
+	}
+	if row_count == 0 {
+		return ErrNoData
 	}
 	conn.Do("")
 	byte_values, _ := conn.Do("SDIFF", redis_set, redis_set_new)
