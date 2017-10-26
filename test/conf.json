@@ -1,6 +1,6 @@
 { 
 	"Http":{
-		"Addr":":8877",
+		"Addr":":8875",
 		"TimeOut":10
 	},
 	"DB":{
@@ -8,7 +8,7 @@
 		"Port":"3306",
 		"User":"root",
 		"Passwd":"Mysql@2017",
-		"DbName":"rules"
+		"DbName":"dms"
 	},
 	"Redis":{
 		"Addr":"127.0.0.1:6379",

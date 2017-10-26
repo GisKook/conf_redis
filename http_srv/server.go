@@ -67,6 +67,7 @@ func (s *Server) Handle() {
 	http.HandleFunc("/knet2sp/update_unsub_number", s.handler_update_unsub_number)
 	http.HandleFunc("/knet2sp/get_msg", s.handler_get_msg)
 	http.HandleFunc("/knet2sp/set_msg", s.handler_set_msg)
+	http.HandleFunc("/knet2sp/get_version", s.handler_get_version)
 	http.ListenAndServe(s.conf.Http.Addr, nil)
 }
 

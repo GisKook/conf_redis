@@ -12,7 +12,8 @@ var (
 )
 
 const (
-	SQL_FMT string = "select t2.%s from %s t2, rules_version t1 where t2.rules_id=t1.id and t1.valid=1"
+	SQL_FMT string = "select t2.%s ,t1.version from %s t2, rules_version t1 where t2.rules_id=t1.id and t1.valid=1"
+	VERSION string = "version"
 )
 
 func (s *Server) update_core(redis_set string, table string, column string) error {
@@ -37,10 +38,11 @@ func (s *Server) update_core(redis_set string, table string, column string) erro
 	defer rows.Close()
 
 	row_count := 0
+	var version string
 	for rows.Next() {
 		row_count++
 		var value string
-		if err := rows.Scan(&value); err != nil {
+		if err := rows.Scan(&value, &version); err != nil {
 			return err
 		}
 		conn.Send("SADD", redis_set, value)
@@ -49,6 +51,7 @@ func (s *Server) update_core(redis_set string, table string, column string) erro
 	if row_count == 0 {
 		return ErrNoData
 	}
+	conn.Send("SET", table+VERSION, version)
 	conn.Do("")
 	byte_values, _ := conn.Do("SDIFF", redis_set, redis_set_new)
 	values, _ := redis.Strings(byte_values, nil)
