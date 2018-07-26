@@ -43,6 +43,17 @@ func EncodeResponse(code ResponseCode) string {
 	return string(resp)
 }
 
+func EncodeErrResponse(code ResponseCode, errmsg string) string {
+	response := &Response{
+		Code: int(code),
+		Desc: errmsg,
+	}
+
+	resp, _ := json.Marshal(response)
+
+	return string(resp)
+}
+
 func dump_requst(r *http.Request) {
 	v, e := httputil.DumpRequest(r, true)
 	if e != nil {

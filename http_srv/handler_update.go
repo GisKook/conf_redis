@@ -9,6 +9,7 @@ import (
 func (s *Server) handler_common(w http.ResponseWriter, r *http.Request, redis_set string, table string, column string) {
 
 	defer func() {
+		s.flag_ci.unlock()
 		if x := recover(); x != nil {
 			log.Println("crash")
 			fmt.Fprint(w, EncodeResponse(HTTP_RESP_INTERNAL_ERR))
@@ -21,10 +22,9 @@ func (s *Server) handler_common(w http.ResponseWriter, r *http.Request, redis_se
 	}
 	if err := s.update_core(redis_set, table, column); err != nil {
 		log.Println(err.Error())
-		fmt.Fprint(w, EncodeResponse(HTTP_RESP_EXCLUSIVE))
+		fmt.Fprint(w, EncodeErrResponse(HTTP_RESP_ERR, err.Error()))
 		return
 	}
-	s.flag_ci.unlock()
 
 	fmt.Fprint(w, EncodeResponse(HTTP_RESP_SUCCESS))
 }
