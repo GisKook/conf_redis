@@ -30,25 +30,25 @@ func (s *Server) handler_common(w http.ResponseWriter, r *http.Request, redis_se
 }
 
 func (s *Server) handler_update_ci(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "ci", "ci", "ci")
+	s.handler_common(w, r, "ci", "CI", "CI")
 }
 
 func (s *Server) handler_update_black_list(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "black_list", "black_list", "phone")
+	s.handler_common(w, r, "black_list", "BLACK_LIST", "PHONE")
 }
 
 func (s *Server) handler_update_county_number(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "county_number", "county_number", "county_number")
+	s.handler_common(w, r, "county_number", "COUNTY_NUMBER", "COUNTY_NUMBER")
 }
 
 func (s *Server) handler_update_local_number(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "local_number", "local_number", "local_number")
+	s.handler_common(w, r, "local_number", "LOCAL_NUMBER", "LOCAL_NUMBER")
 }
 
 func (s *Server) handler_update_white_list(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "white_list", "white_list", "phone")
+	s.handler_common(w, r, "white_list", "WHITE_LIST", "PHONE")
 }
 
 func (s *Server) handler_update_unsub_number(w http.ResponseWriter, r *http.Request) {
-	s.handler_common(w, r, "unsub_number", "unsub_number", "unsub_number")
+	s.handler_common(w, r, "unsub_number", "UNSUB_NUMBER", "UNSUB_NUMBER")
 }

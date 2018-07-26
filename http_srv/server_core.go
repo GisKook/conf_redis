@@ -12,7 +12,7 @@ var (
 )
 
 const (
-	SQL_FMT string = "select t2.%s ,t1.version_code from %s t2, rules_version t1 where t2.rules_id=t1.id and t1.valid=1"
+	SQL_FMT string = "select t2.%s ,t1.VERSION_CODE from %s t2, RULES_VERSION t1 where t2.rules_id=t1.id and t1.valid=1"
 	VERSION string = "version"
 )
 
